@@ -1,4 +1,4 @@
-package sk.stuba.fei.uim.oop.assignment3.controllers;
+package sk.stuba.fei.uim.oop.assignment3.entities.shoppingCart.web;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
