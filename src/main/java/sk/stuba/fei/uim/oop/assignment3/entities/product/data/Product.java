@@ -7,11 +7,12 @@ import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 import sk.stuba.fei.uim.oop.assignment3.entities.product.web.ProductRequest;
 
 @Entity
 @AllArgsConstructor
-@Getter
+@Getter @Setter
 public class Product {
 
     @Id
@@ -27,8 +28,6 @@ public class Product {
     private String unit;
 
     private Double price;
-
-    
 
     public Product(ProductRequest request) {
         this.name = request.getName();
