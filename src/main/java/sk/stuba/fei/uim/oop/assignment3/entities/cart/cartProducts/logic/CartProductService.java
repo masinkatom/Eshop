@@ -8,8 +8,8 @@ import sk.stuba.fei.uim.oop.assignment3.entities.cart.cartProducts.data.ICartPro
 import sk.stuba.fei.uim.oop.assignment3.entities.product.data.Product;
 
 @Service
-public class CartProductService implements ICartProductService{
-    
+public class CartProductService implements ICartProductService {
+
     @Autowired
     private ICartProductRepository repo;
 

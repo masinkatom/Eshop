@@ -5,7 +5,7 @@ import sk.stuba.fei.uim.oop.assignment3.entities.product.data.Product;
 
 @Getter
 public class ProductResponse {
-    
+
     private long id;
 
     private String name;
@@ -27,6 +27,4 @@ public class ProductResponse {
         this.price = product.getPrice();
     }
 
-
-    
 }

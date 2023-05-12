@@ -13,20 +13,20 @@ import sk.stuba.fei.uim.oop.assignment3.entities.product.web.ProductRequestUpdat
 import sk.stuba.fei.uim.oop.assignment3.exceptions.NotFoundException;
 
 @Service
-public class ProductService implements IProductService{
+public class ProductService implements IProductService {
 
     @Autowired
     private IProductRepository repo;
 
     @Override
-    public ArrayList<Product> getAll(){
+    public ArrayList<Product> getAll() {
         return this.repo.findAll();
     }
 
     @Override
     public Product getById(long idProduct) throws NotFoundException {
         Product product = this.repo.getProdById(idProduct);
-        if (product != null){
+        if (product != null) {
             return product;
         }
         throw new NotFoundException();
@@ -42,7 +42,7 @@ public class ProductService implements IProductService{
         return this.repo.save(new Product(request));
     }
 
-    public int addAmount(long idProduct, ProductAmount requestBody) throws NotFoundException{
+    public int addAmount(long idProduct, ProductAmount requestBody) throws NotFoundException {
         Product product = this.getById(idProduct);
         int amo = product.getAmount() + requestBody.getAmount();
         product.setAmount(amo);
@@ -68,10 +68,9 @@ public class ProductService implements IProductService{
     }
 
     @Override
-    public void decreaseAmount(Product product, int amount){
+    public void decreaseAmount(Product product, int amount) {
         product.setAmount(product.getAmount() - amount);
         this.repo.save(product);
     }
 
-    
 }

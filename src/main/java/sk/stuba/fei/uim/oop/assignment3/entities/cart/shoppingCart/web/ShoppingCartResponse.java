@@ -8,7 +8,8 @@ import lombok.Setter;
 import sk.stuba.fei.uim.oop.assignment3.entities.cart.cartProducts.web.CartProduct;
 import sk.stuba.fei.uim.oop.assignment3.entities.cart.shoppingCart.data.ShoppingCart;
 
-@Getter @Setter
+@Getter
+@Setter
 public class ShoppingCartResponse {
 
     private long id;
@@ -18,7 +19,8 @@ public class ShoppingCartResponse {
     public ShoppingCartResponse(ShoppingCart shoppingCart) {
         this.id = shoppingCart.getId();
         this.payed = shoppingCart.isPayed();
-        this.shoppingList = shoppingCart.getShoppingList().stream().map(CartProduct::new).collect(Collectors.toCollection(ArrayList::new));
+        this.shoppingList = shoppingCart.getShoppingList().stream().map(CartProduct::new)
+                .collect(Collectors.toCollection(ArrayList::new));
     }
-    
+
 }

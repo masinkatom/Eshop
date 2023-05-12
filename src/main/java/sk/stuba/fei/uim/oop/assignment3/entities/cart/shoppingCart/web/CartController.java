@@ -20,17 +20,17 @@ import sk.stuba.fei.uim.oop.assignment3.exceptions.NotFoundException;
 @RestController
 @RequestMapping("/cart")
 public class CartController {
-    
+
     @Autowired
     IShoppingCartService service;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value = "/{id}")
-    public ShoppingCartResponse getCart(@PathVariable("id") long idCart) throws NotFoundException{
+    public ShoppingCartResponse getCart(@PathVariable("id") long idCart) throws NotFoundException {
         return new ShoppingCartResponse(this.service.getById(idCart));
     }
 
     @GetMapping(value = "/{id}/pay")
-    public String pay(@PathVariable("id") long idCart) throws NotFoundException, IllegalOperationException{
+    public String pay(@PathVariable("id") long idCart) throws NotFoundException, IllegalOperationException {
         return Double.toString(this.service.pay(idCart));
     }
 
@@ -40,17 +40,14 @@ public class CartController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/{id}/add")
-    public ShoppingCartResponse addProductToCart(@PathVariable("id") long idCart, @RequestBody CartProduct requestBody) throws NotFoundException, IllegalOperationException{
+    public ShoppingCartResponse addProductToCart(@PathVariable("id") long idCart, @RequestBody CartProduct requestBody)
+            throws NotFoundException, IllegalOperationException {
         return new ShoppingCartResponse(this.service.addProductToCart(idCart, requestBody));
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable("id") long idCart) throws NotFoundException{
+    public void delete(@PathVariable("id") long idCart) throws NotFoundException {
         this.service.delete(idCart);
     }
 
-
-
-    
-    
 }

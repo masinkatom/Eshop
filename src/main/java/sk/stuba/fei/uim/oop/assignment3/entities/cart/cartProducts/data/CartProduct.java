@@ -12,9 +12,10 @@ import lombok.Setter;
 import sk.stuba.fei.uim.oop.assignment3.entities.product.data.Product;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
-public class CartProduct{
+public class CartProduct {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

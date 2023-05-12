@@ -50,7 +50,8 @@ public class ShoppingCartService implements IShoppingCartService {
     }
 
     @Override
-    public ShoppingCart addProductToCart(long idCart, CartProduct requestBody) throws NotFoundException, IllegalOperationException {
+    public ShoppingCart addProductToCart(long idCart, CartProduct requestBody)
+            throws NotFoundException, IllegalOperationException {
         ShoppingCart cart = this.repo.findCartById(idCart);
         Product product = this.productService.getById(requestBody.getProductId());
         if (cart == null || product == null) {
@@ -64,17 +65,16 @@ public class ShoppingCartService implements IShoppingCartService {
         sk.stuba.fei.uim.oop.assignment3.entities.cart.cartProducts.data.CartProduct cartProduct = null;
 
         for (sk.stuba.fei.uim.oop.assignment3.entities.cart.cartProducts.data.CartProduct cp : shoppingList) {
-            if (cp.getProduct().getId() == requestBody.getProductId()){
+            if (cp.getProduct().getId() == requestBody.getProductId()) {
                 cartProduct = cp;
                 break;
             }
         }
 
-        if (cartProduct != null){
+        if (cartProduct != null) {
             cartProduct.setAmount(cartProduct.getAmount() + requestBody.getAmount());
             this.cartProductService.save(cartProduct);
-        }
-        else {
+        } else {
             cartProduct = this.cartProductService.create(product, requestBody.getAmount());
             cart.getShoppingList().add(cartProduct);
         }
@@ -94,7 +94,8 @@ public class ShoppingCartService implements IShoppingCartService {
             throw new IllegalOperationException();
         }
         double price = 0;
-        for (sk.stuba.fei.uim.oop.assignment3.entities.cart.cartProducts.data.CartProduct product : cart.getShoppingList()) {
+        for (sk.stuba.fei.uim.oop.assignment3.entities.cart.cartProducts.data.CartProduct product : cart
+                .getShoppingList()) {
             price += product.getAmount() * product.getProduct().getPrice();
         }
 

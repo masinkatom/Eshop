@@ -4,10 +4,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 public class CartProduct {
-    
+
     private Long productId;
 
     private Integer amount;
@@ -16,6 +17,5 @@ public class CartProduct {
         this.productId = cartProduct.getProduct().getId();
         this.amount = cartProduct.getAmount();
     }
-
 
 }

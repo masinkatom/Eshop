@@ -13,7 +13,8 @@ import lombok.Getter;
 import lombok.Setter;
 import sk.stuba.fei.uim.oop.assignment3.entities.cart.cartProducts.data.CartProduct;
 
-@Getter @Setter
+@Getter
+@Setter
 @Entity
 public class ShoppingCart {
 

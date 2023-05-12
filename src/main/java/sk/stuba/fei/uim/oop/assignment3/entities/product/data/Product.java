@@ -12,7 +12,8 @@ import sk.stuba.fei.uim.oop.assignment3.entities.product.web.ProductRequest;
 
 @Entity
 @NoArgsConstructor
-@Getter @Setter
+@Getter
+@Setter
 public class Product {
 
     @Id
@@ -35,7 +36,6 @@ public class Product {
         this.amount = request.getAmount();
         this.unit = request.getUnit();
         this.price = request.getPrice();
-    }   
-    
-    
+    }
+
 }
