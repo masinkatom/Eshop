@@ -1,12 +1,12 @@
 package sk.stuba.fei.uim.oop.assignment3.entities.product.data;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IProductRepository extends JpaRepository<Product, Long>{
 
-    List<Product> findAll();
+    ArrayList<Product> findAll();
 
     Product getProdById(Long id);
     

@@ -1,6 +1,6 @@
 package sk.stuba.fei.uim.oop.assignment3.entities.product.web;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +27,9 @@ public class ProductController {
     private IProductService service;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<ProductResponse> getAllProducts() {
-        List<ProductResponse> products = this.service.getAll().stream().map(ProductResponse::new)
-                .collect(Collectors.toList());
+    public ArrayList<ProductResponse> getAllProducts() {
+        ArrayList<ProductResponse> products = this.service.getAll().stream().map(ProductResponse::new)
+                .collect(Collectors.toCollection(ArrayList::new));
         return products;
     }
 
@@ -39,7 +39,7 @@ public class ProductController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, value = "/{id}/amount")
-    public ProductAmount getProductAmount(@PathVariable("id") Long idProduct) throws NotFoundException{
+    public ProductAmount getProductAmount(@PathVariable("id") Long idProduct) throws NotFoundException {
         return new ProductAmount(this.service.getAmount(idProduct));
     }
 
@@ -48,6 +48,11 @@ public class ProductController {
         return new ResponseEntity<>(new ProductResponse(this.service.create(requestBody)), HttpStatus.CREATED);
     }
 
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/{id}/amount")
+    public ProductAmount addProductAmount(@PathVariable("id") Long idProduct, @RequestBody ProductAmount requestBody)
+            throws NotFoundException {
+        return new ProductAmount(this.service.addAmount(idProduct, requestBody));
+    }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/{id}")
     public ProductResponse updateProduct(@PathVariable("id") Long idProduct,
@@ -56,10 +61,8 @@ public class ProductController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void deleteProduct(@PathVariable("id") Long idProduct) throws NotFoundException{
+    public void deleteProduct(@PathVariable("id") Long idProduct) throws NotFoundException {
         this.service.delete(idProduct);
     }
-
-    
 
 }

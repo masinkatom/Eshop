@@ -1,12 +1,13 @@
 package sk.stuba.fei.uim.oop.assignment3.entities.product.logic;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import sk.stuba.fei.uim.oop.assignment3.entities.product.data.IProductRepository;
 import sk.stuba.fei.uim.oop.assignment3.entities.product.data.Product;
+import sk.stuba.fei.uim.oop.assignment3.entities.product.web.ProductAmount;
 import sk.stuba.fei.uim.oop.assignment3.entities.product.web.ProductRequest;
 import sk.stuba.fei.uim.oop.assignment3.entities.product.web.ProductRequestUpdate;
 import sk.stuba.fei.uim.oop.assignment3.exceptions.NotFoundException;
@@ -18,7 +19,7 @@ public class ProductService implements IProductService{
     private IProductRepository repo;
 
     @Override
-    public List<Product> getAll(){
+    public ArrayList<Product> getAll(){
         return this.repo.findAll();
     }
 
@@ -41,6 +42,14 @@ public class ProductService implements IProductService{
         return this.repo.save(new Product(request));
     }
 
+    public int addAmount(long idProduct, ProductAmount requestBody) throws NotFoundException{
+        Product product = this.getById(idProduct);
+        int amo = product.getAmount() + requestBody.getAmount();
+        product.setAmount(amo);
+        this.repo.save(product);
+        return product.getAmount();
+    }
+
     @Override
     public Product update(long idProduct, ProductRequestUpdate request) throws NotFoundException {
         Product product = this.getById(idProduct);
@@ -56,6 +65,12 @@ public class ProductService implements IProductService{
     @Override
     public void delete(long idProduct) throws NotFoundException {
         this.repo.delete(this.getById(idProduct));
+    }
+
+    @Override
+    public void decreaseAmount(Product product, int amount){
+        product.setAmount(product.getAmount() - amount);
+        this.repo.save(product);
     }
 
     
